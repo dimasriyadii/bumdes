@@ -150,8 +150,8 @@
                                     <a class="dropdown-item <?php if($halaman == 'Permohonan Pinjaman') echo "active" ?>" href="permohonan-pinjaman">
                                         Permohonan Pinjaman
                                     </a>
-                                    <a class="dropdown-item <?php if($halaman == 'Pelunasan Pinjaman') echo "active" ?>" href="pelunasan-pinjaman">
-                                        Pelunasan Pinjaman
+                                    <a class="dropdown-item <?php if($halaman == 'Status Pinjaman & Pelunasan') echo "active" ?>" href="status-pinjaman-pelunasan">
+                                        Status Pinjaman & Pelunasan
                                     </a>
                                     <a class="dropdown-item <?php if($halaman == 'Kerjasama') echo "active" ?>" href="kerjasama">
                                         Kerjasama

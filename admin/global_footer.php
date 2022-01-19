@@ -28,19 +28,20 @@
         <script src="../assets/dist/js/tabler.min.js"></script>
 
         <script src="./assets/ckeditor/ckeditor.js"></script>
-        <script src="./assets/sweetalert/sweetalert2.all.min.js"></script>
+        <!-- <script src="./assets/sweetalert/sweetalert2.all.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="./assets/myscript.js"></script>
         <script>
           $(function () {
-            $("#example1").DataTable({
+            $(".example1").DataTable({
               "responsive": true,
               "autoWidth": false,
             });
-            $('#example2').DataTable({
+            $('.example2').DataTable({
               "paging": true,
               "lengthChange": false,
               "searching": false,
-              "ordering": true,
+              "ordering": false,
               "info": true,
               "autoWidth": false,
               "responsive": true,

@@ -1,6 +1,6 @@
 <?php
 $halaman = 'Kerjasama';
-$conn = mysqli_connect('localhost', 'root', '', 'desa');
+include 'koneksi.php';
 include 'global_header.php';
 include 'global_navigasi.php';
 

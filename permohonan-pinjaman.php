@@ -1,6 +1,5 @@
 <?php
 $halaman = 'Permohonan Pinjaman';
-$conn = mysqli_connect('localhost', 'root', '', 'desa');
 include 'global_header.php';
 include 'global_navigasi.php';
 ?>
@@ -25,10 +24,11 @@ include 'global_navigasi.php';
                 ?>
 
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-9">
+            <div class="col-lg-12 col-xl-12">
                 <div class="card card-lg">
                     <div class="card-body markdown">
-                        <h1>Silahkan isi formulir berikut untuk mengajukan permohonan pinjaman</h1>
+                        <h1 class="d-inline">Silahkan isi formulir berikut untuk mengajukan permohonan pinjaman baru.</h1>
+                        <p>sudah pernah ajukan peminjaman? <a href="status-pinjaman-pelunasan">klik disini</a> untuk ajukan pinjaman lagi.</p>
                         <br>
 
                         <form action="" method="post" enctype="multipart/form-data">
@@ -51,8 +51,9 @@ include 'global_navigasi.php';
                                             placeholder="Masukkan Alamat" required>
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label required">Upload Foto Usaha</div>
-                                        <input type="file" class="form-control" name="fotousaha" required>
+                                        <label class="form-label required">Jumlah Pengajuan</label>
+                                        <input type="text" class="form-control" name="jmlpengajuan"
+                                            placeholder="Masukkan jumlah pengajuan " required>
                                     </div>
                                     <div class="mb-3">
                                         <div class="form-label required">Upload Surat Keterangan Usaha </div>
@@ -77,9 +78,13 @@ include 'global_navigasi.php';
                                             maxlength="12" name="nohp" placeholder="Masukkan nomor hp " required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label required">Jumlah Pengajuan</label>
-                                        <input type="text" class="form-control" name="jmlpengajuan"
-                                            placeholder="Masukkan jumlah pengajuan " required>
+                                        <label class="form-label required">Durasi Angsuran/Tenor (Bulan)</label>
+                                        <input type="text" onkeypress="return hanyaAngka(event)" class="form-control" name="drsiangsuran"
+                                            placeholder="Masukkan durasi angsuran/tenor " required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-label required">Upload Foto Usaha</div>
+                                        <input type="file" class="form-control" name="fotousaha" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,21 +106,20 @@ include 'global_footer.php';
     <?php
 if(isset($_POST['upload'], $_POST['nik'])){
 
-    $date = date('d-M-Y');
-    $date = date('d-M-Y');
+    $date = date('Y-m-d');
     $nama = htmlentities(strip_tags(trim($_POST['nama'])));
     $nokk = htmlentities(strip_tags(trim($_POST['nokk'])));
     $alamat = htmlentities(strip_tags(trim($_POST['alamat'])));
 
     $nik = $_POST['nik'];
    
-    $query = mysqli_query($conn, "SELECT nik FROM permohonan_pinjaman WHERE nik = '$nik'");
-   
+    $query = $koneksi->query("SELECT nik, nokk FROM peminjam WHERE nokk = '$nokk' AND nik = '$nik'");
 
     // $nik = htmlentities(strip_tags(trim($_POST['nik'])));
     $email = htmlentities(strip_tags(trim($_POST['email'])));
     $nohp = htmlentities(strip_tags(trim($_POST['nohp'])));
     $jmlpengajuan = htmlentities(strip_tags(trim($_POST['jmlpengajuan'])));
+    $drsiangsuran = htmlentities(strip_tags(trim($_POST['drsiangsuran'])));
 
     $foto1 = htmlentities(strip_tags(trim($_FILES['fotousaha']['name'])));
     $tmp1 = htmlentities(strip_tags(trim($_FILES['fotousaha']['tmp_name'])));
@@ -130,23 +134,23 @@ if(isset($_POST['upload'], $_POST['nik'])){
 
     if (move_uploaded_file($tmp1, $path1)){
         move_uploaded_file($tmp2, $path2);
-
         if($query -> num_rows > 0){
             echo "<script>alert('NIK sudah terdaftar');</script>";
+            echo "<script> document.location.href='./status-pinjaman-pelunasan?nokk=". $nokk. "&nik=". $nik ."';</script>";
             }
             else {
-            mysqli_query($conn, "INSERT INTO permohonan_pinjaman (nama, nokk, alamat, nik, email, nohp, jmlpengajuan, fotousaha, fotoketusaha, tanggal) VALUES ('$nama', '$nokk','$alamat','$nik','$email', '$nohp', '$jmlpengajuan', '$barufoto1', '$barufoto2', '$date')");
-            echo "<script>alert('Permohonan Pinjaman Berhasil Diinput');</script>";
-             }
+                $query1 = "INSERT INTO peminjam (nama, nokk, alamat, nik, email, nohp, fotousaha, fotoketusaha, tanggal) VALUES ('$nama', '$nokk','$alamat','$nik','$email', '$nohp', '$barufoto1', '$barufoto2', '$date');";
+                $proses1 = $koneksi->query($query1);
+                $last_id = $koneksi->insert_id;
+
+                $query2 = "INSERT INTO permohonan_pinjaman (id_peminjam, peminjaman_ke, jumlah_pinjam, durasi_angsuran, tanggal) VALUES ('$last_id', 1,'$jmlpengajuan','$drsiangsuran', '$date');";
+                $proses2 = $koneksi->query($query2);
+
+               if ($proses1 === TRUE && $proses2 === TRUE){
+                    echo "<script>alert('Permohonan Pinjaman Berhasil Diinput');</script>";
+                    echo "<script> document.location.href='./status-pinjaman-pelunasan?nokk=". $nokk. "&nik=". $nik ."';</script>";
                 }
-
-        // $query = 'INSERT INTO permohonan_pinjaman (nama, nokk, alamat, nik, email, nohp, jmlpengajuan, fotousaha, fotoketusaha, tanggal) VALUES ("'.$nama.'","'.$nokk.'", "'.$alamat.'", "'.$nik.'", "'.$email.'", "'.$nohp.'", "'.$jmlpengajuan.'", "'.$barufoto1.'", "'.$barufoto2.'", "'.$date.'" )';
-
-        // $proses = $conn->query($query);
-        // if ($proses){
-        //     $_SESSION['pesan'] = 'Tambah';
-        //     echo "<script> document.location.href='./permohonan-pinjaman';</script>";
-        // }
+            }
     }
-
+}
 ?>

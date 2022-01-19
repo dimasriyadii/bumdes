@@ -28,7 +28,7 @@ include 'global_header.php';
                         <div class="card-body">
                             <h3 class="card-title">Halaman Edit <?= $halaman ?></h3>
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table class="example1 table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>

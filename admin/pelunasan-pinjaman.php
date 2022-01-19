@@ -2,6 +2,7 @@
 $halaman = 'Pelunasan Pinjaman';
 include 'global_header.php';
 ?>
+
 <div class="content">
     <div class="container-xl">
         <div class="page-header d-print-none">
@@ -13,65 +14,74 @@ include 'global_header.php';
                 </div>
             </div>
         </div>
+
         <?php
-                //menampilkan pesan jika ada pesan
-                if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-                    $pesan = $_SESSION['pesan'];
-                    echo '<div class="flash-data" data-flashdata="' . $_SESSION['pesan'] . '"></div>';
-                }
-                $_SESSION['pesan'] = '';
-                ?>
+        include '../koneksi.php';
+        ?>
+
+        <?php
+        //menampilkan pesan jika ada pesan
+        if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+        $pesan = $_SESSION['pesan'];
+        echo '<div class="flash-data" data-flashdata="' . $_SESSION['pesan'] . '"></div>';
+        }
+        $_SESSION['pesan'] = '';
+        ?>
+
         <div class="col-12">
             <div class="card">
                 <div class="row row-0">
                     <div class="col">
                         <div class="card-body">
-                            <h3 class="card-title">Halaman Edit <?= $halaman ?></h3>
+                            <h3 class="card-title">Halaman <?= $halaman ?></h3>
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+
+                            <?php
+                                    $peminjaman_ke = 0;
+                                    $query2 = "SELECT a.*, b.peminjaman_ke, c.nik, c.nokk, c.nama FROM pelunasan_pinjaman a LEFT JOIN permohonan_pinjaman b ON b.id_permohonan = a.id_permohonan LEFT JOIN peminjam c ON c.id_peminjam = b.id_peminjam;";
+                                    $data2 = mysqli_query($koneksi, $query2);
+                                    if($data2 -> num_rows > 0){
+                                ?>
+                                <table id="example1" class="table table-responsive table-striped">
+
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Lengkap</th>
-                                            <th>NIK</th>
-                                            <th>Pembayaran Ke</th>
-                                            <th>Sisa Pinjaman</th>
-                                            <th>Lanjut Pinjaman</th>
-                                            <th>Tanggal</th>
-                                            <th>Aksi</th>
+                                            <td>Peminjaman</td>
+                                            <td>Pembayaran</td>
+                                            <td>Tanggal Jatuh Tempo</td>
+                                            <td>Tanggal Dibayarkan</td>
+                                            <td>Status Pelunasan</td>
+                                            <td>No KK</td>
+                                            <td>NIK</td>
+                                            <td>Nama Pemohon</td>
+                                            <td>Aksi</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $query = $koneksi->query("SELECT * FROM pelunasan_pinjaman");
-                                        $nomor = 1;
-                                        foreach ($query as $data): ?>
+                                        <?php 
+                                            while($d2 = mysqli_fetch_array($data2)){
+                                        ?>
                                         <tr>
-                                            <td><?= $nomor; ?></td>
-                                            <td><?= $data['nama']; ?></td>
-                                            <td><?= $data['nik'] ?></td>
-                                            <td><?= $data['bayarke']; ?></td>
-                                            <td><?= $data['sisapinjam']; ?></td>
-                                            <td><?= $data['lanjutpinjam']; ?></td>
-                                            <td><?= $data['tanggal'];?></td>
-                                            <td>
-                                                <a class="icon" href="hapuspelunasanpinjam?id=<?php echo $data['id_pelunasan'];?>"
-                                                    onclick="return confirm('Apakah Anda Ingin Menghapus Data Ini');"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <line x1="4" y1="7" x2="20" y2="7" />
-                                                        <line x1="10" y1="11" x2="10" y2="17" />
-                                                        <line x1="14" y1="11" x2="14" y2="17" />
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></a>
-                                            </td>
+                                            <td>ke-<?= $peminjaman_ke = $d2['peminjaman_ke']; ?></td>
+                                            <td>ke-<?= $d2['bayar_ke']; ?></td>
+                                            <td><?= $d2['tanggal_jatuh_tempo']; ?></td>
+                                            <td><?= $d2['tanggal_dibayarkan']; ?></td>
+                                            <td><?= $d2['status']; ?></td>
+                                            <td><?= $d2['nokk']; ?></td>
+                                        <td><?= $d2['nik']; ?></td>
+                                        <td><?= $d2['nama']; ?></td>
+                                            <td></td>
                                         </tr>
-                                        <?php $nomor++; endforeach; ?>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
+                                <?php
+                                    } else { echo "<br>Tidak ada data."; }
+                                ?>
+
+
+
+
                             </div>
                         </div>
                     </div>
