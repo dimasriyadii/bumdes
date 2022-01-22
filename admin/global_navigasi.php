@@ -15,6 +15,9 @@
                 </span>
             </a>
         </li>
+
+
+
         <li class="nav-item <?php if ($halaman == 'Visi Misi' or $halaman == 'Struktur Organisasi' or $halaman == 'Badan Pengurus') echo "active" ?> dropdown">
             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -30,37 +33,44 @@
                     Profil
                 </span>
             </a>
-            <div class="dropdown-menu <?php if ($halaman == 'Visi Misi' or $halaman == 'Struktur Organisasi' or $halaman == 'Badan Pengurus') echo "show" ?>">
+            <div class="dropdown-menu <?php if ($halaman == 'Profil - Visi Misi' or $halaman == 'Profil - Struktur Organisasi' or $halaman == 'Profil - Badan Pengurus' or $halaman == 'Profil - Anggota Unit Usaha Lainnya' or $halaman == 'Profil - Anggota Kuliner' or $halaman == 'Profil - Anggota Pertamini' or $halaman == 'Profil - Anggota KSP') echo "show" ?>">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                        <a class="dropdown-item <?php if ($halaman == 'Visi Misi') echo "active" ?>" href="./visi-misi">
+                        <a class="dropdown-item <?php if ($halaman == 'Profil - Visi Misi') echo "active" ?>" href="./visi-misi">
                             Visi Misi
                         </a>
-                        <a class="dropdown-item <?php if ($halaman == 'Struktur Organisasi') echo "active" ?>" href="./struktur-organisasi">
+                        <a class="dropdown-item <?php if ($halaman == 'Profil - Struktur Organisasi') echo "active" ?>" href="./struktur-organisasi">
                             Struktur Organisasi
                         </a>
-                        <a class="dropdown-item <?php if ($halaman == 'Badan Pengurus') echo "active" ?>" href="./badan-pengurus">
+                        <a class="dropdown-item <?php if ($halaman == 'Profil - Badan Pengurus') echo "active" ?>" href="./badan-pengurus">
                             Badan Pengurus
                         </a>
-
                     </div>
-                    <div class="dropdown-menu-column">
-                        <div class="dropend">
-                            <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                                Anggota
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="./anggotaksp.php" class="dropdown-item">KSP</a>
-                                <a href="./anggotapertamini" class="dropdown-item">Pertamini</a>
-                                <a href="./anggotakuliner" class="dropdown-item">Kuliner</a>
-                                <a href="./anggotauul" class="dropdown-item">Unit Usaha Lainnya</a>
-                            </div>
+                </div>
+                <div class="dropdown-menu-column">
+                    <div class="dropend">
+                        <?php $retVal = ($halaman == 'Profil - Anggota Unit Usaha Lainnya' or $halaman == 'Profil - Anggota Kuliner' or $halaman == 'Profil - Anggota Pertamini' or $halaman == 'Profil - Anggota KSP') ? 'show' : ''; ?>
+                        <a class="dropdown-item dropdown-toggle  <?= $retVal; ?>" href="#" data-bs-toggle="dropdown" role="button">
+                            Anggota
+                        </a>
+                        <div class="dropdown-menu <?= $retVal; ?>">
+                            <a href="./anggotaksp.php" class="dropdown-item <?php if ($halaman == 'Profil - Anggota KSP') echo "active" ?>">KSP</a>
+                            <a href="./anggotapertamini" class="dropdown-item <?php if ($halaman == 'Profil - Anggota Pertamini') echo "active" ?>">Pertamini</a>
+                            <a href="./anggotakuliner" class="dropdown-item <?php if ($halaman == 'Profil - Anggota Kuliner') echo "active" ?>">Kuliner</a>
+                            <a href="./anggotauul" class="dropdown-item <?php if ($halaman == 'Profil - Anggota Unit Usaha Lainnya') echo "active" ?>">Unit Usaha Lainnya</a>
                         </div>
                     </div>
                 </div>
             </div>
         </li>
-        <li class="nav-item dropdown">
+
+
+
+
+
+
+
+        <li class="nav-item <?php if ($halaman == 'Laporan - Unit Usaha Lainnya' or $halaman == 'Laporan - Unit Usaha Kuliner' or $halaman == 'Laporan - Unit Usaha Pertamini' or $halaman == 'Laporan - Unit Usaha KSP' or $halaman == 'Laporan - Badan Usaha Sekretaris' or $halaman == 'Laporan - Badan Usaha Bendahara') echo "active" ?> dropdown">
             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -74,35 +84,55 @@
                 <span class="nav-link-title">
                     Laporan
                 </span>
-            </a>
+            </a>        
             <div class="dropdown-menu">
-                <div class="dropdown-menu-columns">
-                    <div class="dropdown-menu-column">
-                        <div class="dropend">
-                            <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                                Unit Usaha
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="./laporanksp.php" class="dropdown-item">KSP</a>
-                                <a href="./laporanpertamini.php" class="dropdown-item">Pertamini</a>
-                                <a href="./laporankuliner.php" class="dropdown-item">Kuliner</a>
-                                <a href="./laporanuul.php" class="dropdown-item">Unit Usaha Lainnya</a>
-                            </div>
+                <div class="dropdown-menu-column">
+                    <div class="dropend">
+                        <a class="dropdown-item <?php if ($halaman == 'Laporan - Unit Usaha Lainnya' or $halaman == 'Laporan - Unit Usaha Kuliner' or $halaman == 'Laporan - Unit Usaha Pertamini' or $halaman == 'Laporan - Unit Usaha KSP') echo "show" ?> dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button">
+                            Unit Usaha
+                        </a>
+                        <div class="dropdown-menu <?= $retVal; ?>">
+                            <a href="./laporanksp.php" class="dropdown-item <?php if ($halaman == 'Laporan - Unit Usaha KSP') echo "active" ?>">KSP</a>
+                            <a href="./laporanpertamini" class="dropdown-item <?php if ($halaman == 'Laporan - Unit Usaha Pertamini') echo "active" ?>">Pertamini</a>
+                            <a href="./laporankuliner" class="dropdown-item <?php if ($halaman == 'Laporan - Unit Usaha Kuliner') echo "active" ?>">Kuliner</a>
+                            <a href="./laporanuul" class="dropdown-item <?php if ($halaman == 'Laporan - Unit Usaha Lainnya') echo "active" ?>">Unit Usaha Lainnya</a>
                         </div>
-                        <div class="dropend">
-                            <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                                Badan Usaha
-                            </a>
-                            <div class="dropdown-menu">
-                                <!-- <a href="./sign-in.html" class="dropdown-item">Ketua</a> -->
-                                <a href="./sekretaris.php" class="dropdown-item">Sekretaris</a>
-                                <a href="./bendahara.php" class="dropdown-item">Bendahara</a>
-                            </div>
+                    </div>
+                </div>
+                <div class="dropdown-menu-column">
+                    <div class="dropend">
+                    <?php $retVal = ($halaman == 'Laporan - Badan Usaha Sekretaris' or $halaman == 'Laporan - Badan Usaha Bendahara') ? 'show' : ''; ?>
+                        <a class="dropdown-item dropdown-toggle  <?= $retVal; ?>" href="#" data-bs-toggle="dropdown" role="button">
+                            Badan Usaha
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="./sekretaris.php" class="dropdown-item <?php if ($halaman == 'Laporan - Badan Usaha Sekretaris') echo "active" ?>">Sekretaris</a>
+                            <a href="./bendahara.php" class="dropdown-item <?php if ($halaman == 'Laporan - Badan Usaha Bendahara') echo "active" ?>">Bendahara</a>
                         </div>
                     </div>
                 </div>
             </div>
         </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <li class="nav-item <?php if ($halaman == 'Permohonan Pinjaman' or $halaman == 'Pelunasan Pinjaman' or $halaman == 'Kerjasama') echo "active" ?> dropdown">
             <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -114,16 +144,13 @@
                     Layanan
                 </span>
             </a>
-            <div class="dropdown-menu <?php if ($halaman == 'Data Pemohon' or $halaman == 'Permohonan Pinjaman' or $halaman == 'Pelunasan Pinjaman' or $halaman == 'Kerjasama' or $halaman = 'Status Pinjaman & Pelunasan') echo "show" ?>">
+            <div class="dropdown-menu <?php if ($halaman == 'Data Pemohon' or $halaman == 'Permohonan Pinjaman' or $halaman == 'Kerjasama') echo "show" ?>">
                 <a class="dropdown-item <?php if ($halaman == 'Data Pemohon') echo "active" ?>" href="./data-pemohon">
                     Pemohon Pinjaman
                 </a>
-                <a class="dropdown-item <?php if ($halaman == 'Permohonan Pinjaman' or $halaman == 'Status Pinjaman & Pelunasan') echo "active" ?>" href="./permohonan-pinjaman">
+                <a class="dropdown-item <?php if ($halaman == 'Permohonan Pinjaman') echo "active" ?>" href="./permohonan-pinjaman">
                     Pinjaman & Pelunasan
                 </a>
-                <!-- <a class="dropdown-item <?php if ($halaman == 'Pelunasan Pinjaman') echo "active" ?>" href="./pelunasan-pinjaman">
-                    Pelunasan Pinjaman
-                </a> -->
                 <a class="dropdown-item <?php if ($halaman == 'Kerjasama') echo "active" ?>" href="./kerjasama">
                     Kerjasama
                 </a>

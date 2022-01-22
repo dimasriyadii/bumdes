@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Badan Pengurus';
+$halaman = 'Profil - Badan Pengurus';
 include 'global_header.php';
 ?>
 

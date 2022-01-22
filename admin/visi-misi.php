@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Visi Misi';
+$halaman = 'Profil - Visi Misi';
 include 'global_header.php';
 ?>
 

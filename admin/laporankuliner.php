@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Laporan Kuliner';
+$halaman = 'Laporan - Unit Usaha Kuliner';
 include 'global_header.php';
 ?>
 

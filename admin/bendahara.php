@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Bendahara';
+$halaman = 'Laporan - Badan Usaha Bendahara';
 include 'global_header.php';
 ?>
 

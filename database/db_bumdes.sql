@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 19, 2022 at 07:15 AM
+-- Generation Time: Jan 22, 2022 at 07:41 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.0.14
 
@@ -90,6 +90,29 @@ INSERT INTO `kerjasama` (`id_kerjasama`, `namausaha`, `proposalusaha`, `foto`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `laporan`
+--
+
+CREATE TABLE `laporan` (
+  `id_laporan` int(10) NOT NULL,
+  `isilaporan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `laporan`
+--
+
+INSERT INTO `laporan` (`id_laporan`, `isilaporan`) VALUES
+(1, '<p>laporan ksp</p>\r\n'),
+(2, '<p>lap perta</p>\r\n'),
+(3, '<p>lap kuli</p>\r\n'),
+(4, '<p>lap uul</p>\r\n'),
+(5, '<p>sekretaris</p>\r\n'),
+(6, '<p>bendahara</p>\r\n');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pelunasan_pinjaman`
 --
 
@@ -108,7 +131,10 @@ CREATE TABLE `pelunasan_pinjaman` (
 --
 
 INSERT INTO `pelunasan_pinjaman` (`id_pelunasan`, `id_permohonan`, `bayar_ke`, `tanggal_jatuh_tempo`, `tanggal_dibayarkan`, `status`, `notif`) VALUES
-(140, 5, 1, '2022-01-18', NULL, 'Belum Bayar', 'Belum Baca');
+(142, 5, 1, '2022-01-19', '2022-01-20', 'Sudah Bayar', 'Sudah Baca'),
+(143, 5, 2, '2022-02-18', NULL, 'Belum Bayar', '-'),
+(144, 6, 1, '2022-01-19', '2022-01-20', 'Sudah Bayar', 'Sudah Baca'),
+(145, 6, 2, '2022-02-18', NULL, 'Belum Bayar', '-');
 
 -- --------------------------------------------------------
 
@@ -134,7 +160,8 @@ CREATE TABLE `peminjam` (
 --
 
 INSERT INTO `peminjam` (`id_peminjam`, `nama`, `nokk`, `alamat`, `nik`, `email`, `nohp`, `fotousaha`, `fotoketusaha`, `tanggal`) VALUES
-(4, 'Rio Ananda Putra', '456', 'Bandar Lampung', '123', 'rioanandaputra1998@gmail.com', '789', '1920220648thEndless River.jpg', '1920220648thEndless River.jpg', '2022-01-19');
+(4, 'Rio Ananda Putra', '456', 'Bandar Lampung', '123', 'rioanandaputra1998@gmail.com', '789', '1920220648thEndless River.jpg', '1920220648thEndless River.jpg', '2022-01-19'),
+(5, 'Andi', '888', 'Bandar Lampung', '9999', 'andi@gmail.com', '789', '2020220714thWhatsApp Image 2022-01-20 at 09.15.04.jpeg', '2020220714thWhatsApp Image 2022-01-20 at 09.15.04.jpeg', '2022-01-20');
 
 -- --------------------------------------------------------
 
@@ -158,7 +185,8 @@ CREATE TABLE `permohonan_pinjaman` (
 --
 
 INSERT INTO `permohonan_pinjaman` (`id_permohonan`, `id_peminjam`, `peminjaman_ke`, `jumlah_pinjam`, `durasi_angsuran`, `tanggal`, `tanggal_persetujuan`, `status`) VALUES
-(5, 4, 1, 5000000, 12, '2021-12-01', '2021-12-18', 'Sudah Disetujui');
+(5, 4, 1, 5000000, 12, '2021-12-01', '2022-01-20', 'Sudah Disetujui'),
+(6, 5, 1, 5000000, 12, '2022-01-20', '2022-01-20', 'Sudah Disetujui');
 
 -- --------------------------------------------------------
 
@@ -176,9 +204,13 @@ CREATE TABLE `profil` (
 --
 
 INSERT INTO `profil` (`id_profil`, `isiprofil`) VALUES
-(1, '<p>Visi misi di isi disni</p>\r\n'),
+(1, '<p>tess</p>\r\n\r\n<p>&nbsp;</p>\r\n'),
 (2, '2003202108213519032021060338Struktur_2019-03-27-11-49-29_SOTK-LIPI---2019-.jpg'),
-(3, '<p style=\"text-align:center\"><strong>SUSUNAN PENGURUS BADAN USAHA MILIK DESA</strong></p>\r\n\r\n<p style=\"text-align:center\"><strong>(BUMDes) &ldquo;BAJI PA&rsquo;MAI&rdquo;</strong></p>\r\n\r\n<p style=\"text-align:center\"><strong>DESA TAMALATE KEC. GALESONG UTARA KAB. TAKALAR</strong></p>\r\n\r\n<p><br />\r\nKOMISARIS&nbsp; &nbsp; &nbsp; &nbsp; : KEPALA DESA<br />\r\nPENGAWAS&nbsp; &nbsp; &nbsp; &nbsp;: BPD DESA TAMALATE<br />\r\nKETUA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : SUMAWATI, S.Ag<br />\r\nWAKIL KETUA&nbsp;&nbsp; &nbsp;: MUH NUR KHAER AHMAD<br />\r\nSEKRETARIS&nbsp; &nbsp; &nbsp;: HIJAR<br />\r\nBENDAHARA&nbsp; &nbsp; &nbsp;: BUDAYA<br />\r\nANGGOTA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 1. KEPALA UNIT USAHA SPP : SAHARIA<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. KEPALA UNIT USAHA UMUM : NURAENI&nbsp;&nbsp; &nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Link <a href=\"https://drive.google.com/file/d/1VWAjWfjdoDm4hdPlGmz5KfPu_knL6KIV/view?usp=sharing\" target=\"_blank\">Download SK Disini</a></p>\r\n');
+(3, '<p style=\"text-align:center\"><strong>SUSUNAN PENGURUS BADAN USAHA MILIK DESA</strong></p>\r\n\r\n<p style=\"text-align:center\"><strong>(BUMDes) &ldquo;BAJI PA&rsquo;MAI&rdquo;</strong></p>\r\n\r\n<p style=\"text-align:center\"><strong>DESA TAMALATE KEC. GALESONG UTARA KAB. TAKALAR</strong></p>\r\n\r\n<p><br />\r\nKOMISARIS&nbsp; &nbsp; &nbsp; &nbsp; : KEPALA DESA<br />\r\nPENGAWAS&nbsp; &nbsp; &nbsp; &nbsp;: BPD DESA TAMALATE<br />\r\nKETUA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : SUMAWATI, S.Ag<br />\r\nWAKIL KETUA&nbsp;&nbsp; &nbsp;: MUH NUR KHAER AHMAD<br />\r\nSEKRETARIS&nbsp; &nbsp; &nbsp;: HIJAR<br />\r\nBENDAHARA&nbsp; &nbsp; &nbsp;: BUDAYA<br />\r\nANGGOTA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 1. KEPALA UNIT USAHA SPP : SAHARIA<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. KEPALA UNIT USAHA UMUM : NURAENI&nbsp;&nbsp; &nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Link <a href=\"https://drive.google.com/file/d/1VWAjWfjdoDm4hdPlGmz5KfPu_knL6KIV/view?usp=sharing\" target=\"_blank\">Download SK Disini</a></p>\r\n'),
+(4, '<p>ksp</p>\r\n'),
+(5, '<p>pertamini</p>\r\n'),
+(6, '<p>kuli</p>\r\n'),
+(7, '<p>uul</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -239,12 +271,6 @@ ALTER TABLE `permohonan_pinjaman`
   ADD KEY `id_peminjam` (`id_peminjam`);
 
 --
--- Indexes for table `profil`
---
-ALTER TABLE `profil`
-  ADD PRIMARY KEY (`id_profil`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -270,25 +296,19 @@ ALTER TABLE `kerjasama`
 -- AUTO_INCREMENT for table `pelunasan_pinjaman`
 --
 ALTER TABLE `pelunasan_pinjaman`
-  MODIFY `id_pelunasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id_pelunasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `peminjam`
 --
 ALTER TABLE `peminjam`
-  MODIFY `id_peminjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_peminjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `permohonan_pinjaman`
 --
 ALTER TABLE `permohonan_pinjaman`
-  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `profil`
---
-ALTER TABLE `profil`
-  MODIFY `id_profil` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

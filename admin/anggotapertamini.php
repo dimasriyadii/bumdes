@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Anggota Pertamini';
+$halaman = 'Profil - Anggota Pertamini';
 include 'global_header.php';
 ?>
 

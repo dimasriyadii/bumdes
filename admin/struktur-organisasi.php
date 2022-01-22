@@ -1,5 +1,5 @@
 <?php
-$halaman = 'Struktur Organisasi';
+$halaman = 'Profil - Struktur Organisasi';
 include 'global_header.php';
 ?>
 
