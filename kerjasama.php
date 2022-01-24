@@ -82,16 +82,16 @@ include 'global_navigasi.php';
 if(isset($_POST['upload'], $_POST['email'], $_POST['namausaha'])){
     $date = date('d-M-Y');
     $namausaha = $_POST['namausaha'];
-    $querynamausaha = mysqli_query($conn, "SELECT namausaha FROM kerjasama WHERE namausaha = '$namausaha'");
+    $querynamausaha = mysqli_query($koneksi, "SELECT namausaha FROM kerjasama WHERE namausaha = '$namausaha'");
     // $namausaha = htmlentities(strip_tags(trim($_POST['namausaha'])));
     $kegiatanusaha = htmlentities(strip_tags(trim($_POST['kegiatanusaha'])));
     $email = $_POST['email'];
-    $queryemail = mysqli_query($conn, "SELECT email FROM kerjasama WHERE email = '$email'");
-    // $query = mysqli_query($conn, "SELECT email, namausaha FROM kerjasama WHERE email = '$email' AND namausaha = '$namausaha'");
+    $queryemail = mysqli_query($koneksi, "SELECT email FROM kerjasama WHERE email = '$email'");
+    // $query = mysqli_query($koneksi, "SELECT email, namausaha FROM kerjasama WHERE email = '$email' AND namausaha = '$namausaha'");
    
     //cek email
     // if (isset($_POST['email'])) {
-    // $query = mysqli_query($conn, "SELECT email FROM kerjasama WHERE email = '$email'");
+    // $query = mysqli_query($koneksi, "SELECT email FROM kerjasama WHERE email = '$email'");
     // $email = $_POST['email'];
 
    
@@ -116,7 +116,7 @@ if(isset($_POST['upload'], $_POST['email'], $_POST['namausaha'])){
     echo "<script>alert('Email Sudah Terdaftar');</script>";
     }
     else {
-    mysqli_query($conn, "INSERT INTO kerjasama (namausaha, proposalusaha, foto, kegiatanusaha, email, tanggal) VALUES ('$namausaha', '$baruproposalusaha','$barufoto','$kegiatanusaha','$email', '$date')");
+    mysqli_query($koneksi, "INSERT INTO kerjasama (namausaha, proposalusaha, foto, kegiatanusaha, email, tanggal) VALUES ('$namausaha', '$baruproposalusaha','$barufoto','$kegiatanusaha','$email', '$date')");
     echo "<script>alert('Data Berhasil Diinput');</script>";
      }
         }
@@ -126,10 +126,10 @@ if(isset($_POST['upload'], $_POST['email'], $_POST['namausaha'])){
     //     echo "<script>alert('Email sudah terdaftar');</script>";
     // }
     // else {
-    //     mysqli_query($conn, "INSERT INTO kerjasama (namausaha, proposalusaha, foto, kegiatanusaha, email, tanggal) VALUES ("'.$namausaha.'", "'.$baruproposalusaha.'","'.$barufoto.'","'.$kegiatanusaha.'","'.$email.'", "'.$date.'"");
+    //     mysqli_query($koneksi, "INSERT INTO kerjasama (namausaha, proposalusaha, foto, kegiatanusaha, email, tanggal) VALUES ("'.$namausaha.'", "'.$baruproposalusaha.'","'.$barufoto.'","'.$kegiatanusaha.'","'.$email.'", "'.$date.'"");
     // }
 
-    $proses = $conn->query($query);
+    $proses = $koneksi->query($query);
     if ($proses){
         $_SESSION['pesan'] = 'Tambah';
         echo "<script> document.location.href='./kerjasama';</script>";
